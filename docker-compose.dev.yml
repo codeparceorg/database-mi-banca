@@ -1,0 +1,25 @@
+#version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: mi_banca_dev_2026
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin_2026
+      POSTGRES_DB: mi_banca
+    ports: # Opcional
+      - "5432:5432"
+    networks:
+      - k3d-dev 
+    volumes:
+      - mi_banca_dev_2026:/var/lib/postgresql/data
+      - ./schema:/docker-entrypoint-initdb.d
+
+networks:
+  k3d-dev:
+    external: true 
+
+volumes:
+  mi_banca_dev_2026:

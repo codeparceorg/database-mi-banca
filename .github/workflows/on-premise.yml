@@ -1,0 +1,14 @@
+name: On-Premise deploy
+
+on:
+  push:
+    branches: [ "main", "test", "dev" ]
+
+  deploy:
+    runs-on: kubernetes #Runner on-premise
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Docker compose deploy
+        run: docker compose -f docker-compose.dev.yml up -d

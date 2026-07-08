@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: ${DATA_BASE_HOST}
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${DATA_BASE_USER}
+      POSTGRES_PASSWORD: ${DATA_BASE_PASS}
+      POSTGRES_DB: ${DATA_BASE_BD}
+    ports: # OPCIONAL
+      - "5432:5432"
+    networks:
+      - k3d-dev 
+    volumes:
+      - ${DATA_BASE_HOST}:/var/lib/postgresql/data
+      - ./schema:/docker-entrypoint-initdb.d
+      
+networks:
+  k3d-dev:
+    external: true 
+
+
+volumes:
+  ${DATA_BASE_HOST}:
