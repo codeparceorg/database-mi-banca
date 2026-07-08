@@ -9,7 +9,8 @@ services:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: admin_2026
       POSTGRES_DB: mi_banca
-    ports: # Opcional
+    # Opcional
+    ports: 
       - "5432:5432"
     networks:
       - k3d-dev 
