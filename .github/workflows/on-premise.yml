@@ -6,7 +6,7 @@ on:
 
 jobs:
   deploy:
-    runs-on: kubernetes #Runner on-premise
+    runs-on: docker #Runner on-premise
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
