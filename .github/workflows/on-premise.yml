@@ -1,9 +1,10 @@
-name: On-Premise deploy
+name: On-Premise deploy Data Base
 
 on:
   push:
     branches: [ "main", "test", "dev" ]
 
+jobs:
   deploy:
     runs-on: kubernetes #Runner on-premise
     steps:
