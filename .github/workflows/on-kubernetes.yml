@@ -1,4 +1,4 @@
-name: On-Premise deploy Data Base
+name: On-cluster deploy Data Base
 
 on:
   workflow_dispatch:
@@ -27,7 +27,7 @@ jobs:
           
       - name: Deploy to Kubernetes
         run: |
-          cd helm-template/bd
+          cd helm-template/db
           
           envsubst < values.template > values.yaml
           echo "Map values.yaml created."

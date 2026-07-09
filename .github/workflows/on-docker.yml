@@ -1,4 +1,4 @@
-name: On-Premise deploy Data Base
+name: On-docker deploy Data Base
 
 on:
   workflow_dispatch:
