@@ -13,6 +13,14 @@ services:
       - "5432:5432"
     networks:
       - k3d-dev 
+    deploy:
+      resources:
+        limits:
+          cpus: '0.8'       
+          memory: 812M     
+        reservations:
+          cpus: '0.30'      
+          memory: 512M      
     volumes:
       - ${DATA_BASE_HOST}:/var/lib/postgresql/data
       - ./schema:/docker-entrypoint-initdb.d

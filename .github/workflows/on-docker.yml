@@ -1,8 +1,7 @@
 name: On-Premise deploy Data Base
 
 on:
-  push:
-    branches: [ "main", "test", "dev" ]
+  workflow_dispatch:
 
 jobs:
   deploy:

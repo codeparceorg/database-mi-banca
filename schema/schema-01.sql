@@ -10,7 +10,7 @@
 
 CREATE TABLE auth_token (
     id          UUID            PRIMARY KEY DEFAULT gen_random_uuid(),
-    status      varchar(1)     NOT NULL DEFAULT 'A',
+    status      varchar(1)      NOT NULL DEFAULT 'A',
     email       VARCHAR(100)    NOT NULL UNIQUE,
     password    TEXT            NOT NULL UNIQUE,
     token       TEXT            NOT NULL UNIQUE,
@@ -19,3 +19,5 @@ CREATE TABLE auth_token (
     created_at  TIMESTAMPTZ     NOT NULL DEFAULT NOW()
 );
 
+CREATE INDEX idx_auth_token ON auth_token (token);
+CREATE INDEX idx_auth_token_email ON auth_token (email);

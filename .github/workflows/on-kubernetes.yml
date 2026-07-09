@@ -1,0 +1,37 @@
+name: On-Premise deploy Data Base
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: kubernetes #Runner on-premise
+    env:
+      GITHUB_REPOSITORY_NAME: ${{ github.event.repository.name }}
+      GITHUB_ORG: ${{ github.repository_owner }}
+      SVC_NAME: ${{ github.event.repository.name }}-svc
+      NS: sis-${{ github.ref_name  }}-postgres
+
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Checkout helm repository
+        uses: actions/checkout@v4
+        with:
+          repository: codeparceorg/helm-template
+          token: ${{ github.token }}
+          path: helm-template
+          
+      - name: Deploy to Kubernetes
+        run: |
+          cd helm-template/bd
+          
+          envsubst < values.template > values.yaml
+          echo "Map values.yaml created."
+
+          helm upgrade --install ${GITHUB_REPOSITORY_NAME} . --namespace $NS --create-namespace
+          echo "Deploying ${GITHUB_REPOSITORY_NAME} with Helm "
+          echo "Successfully deployed"
