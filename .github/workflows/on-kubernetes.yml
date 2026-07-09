@@ -27,7 +27,7 @@ jobs:
           
       - name: Deploy to Kubernetes
         run: |
-          cd helm-template/db
+          mv schema helm-template/db && cd helm-template/db
           
           envsubst < values.template > values.yaml
           echo "Map values.yaml created."
